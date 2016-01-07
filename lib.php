@@ -122,12 +122,17 @@ class lib_form {
 
 class lib_table {
     
-    function in($border,$width,$class)
+    function start_table($border,$width)
+    {
+        echo '<table border="'.$border.'" width="'.$width.'">';
+    }
+
+    function start_table_style($border,$width,$class)
     {
         echo '<table border="'.$border.'" width="'.$width.'" class="'.$class.'">';
     }
     
-    function out()
+    function stop_table()
     {
         echo '</table>';
     }
@@ -142,10 +147,16 @@ class lib_table {
         echo '</tr>';
     }
     
-    function td($colspan, $val)
+    function td($val)
+    {
+        echo '<td>'.$val.'</td>';
+    }
+
+    function td_colspan($colspan, $val)
     {
         echo '<td colspan="'.$colspan.'">'.$val.'</td>';
     }
+
 }
 
 /**
@@ -164,22 +175,22 @@ class post_method {
 
 class lib_session {
     
-    function in()
+    function session_in()
     {
         session_start();
     }
     
-    function out()
+    function session_out()
     {
         session_destroy();
     }
     
-    function set_new($name, $val)
+    function session_set_new($name, $val)
     {
         $_SESSION[$name]=$val;
     }
     
-    function assign_val($name,$var)
+    function session_assign_to_var($name,$var)
     {
         $$var=$_SESSION[$name];
         return $$var;
@@ -191,11 +202,6 @@ class lib_mysql {
     function con_new($host,$user,$pass)
     {
         mysql_connect($host,$user,$pass);
-    }
-    
-    function con_default()
-    {
-        mysql_connect("localhost","root","iamadmin");
     }
     
     function db_select($db_name)
@@ -272,6 +278,27 @@ class lib_mysql {
         return $result;
     }
     
+}
+
+class lib_display_query extends lib_table
+{
+    function display_table_clear($data)
+    {
+        $num=mysql_num_rows($data);
+        $this->start_table(1,20);
+        for($i=0;$i<$num;$i++)
+        {
+            $this->tr_in();
+            $row=mysql_fetch_row($data);
+            $loop=sizeof($row);
+            for($j=0;$j<$loop;$j++)
+            {
+                $this->td($row[$j]);
+            }
+            $this->tr_out();
+        }
+        $this->stop_table();
+    }
 }
 
 
