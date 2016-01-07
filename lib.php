@@ -282,10 +282,10 @@ class lib_mysql {
 
 class lib_display_query extends lib_table
 {
-    function display_table_clear($data)
+    function display_table_clear($data,$table_width)
     {
         $num=mysql_num_rows($data);
-        $this->start_table(1,20);
+        $this->start_table(1,$table_width);
         for($i=0;$i<$num;$i++)
         {
             $this->tr_in();
