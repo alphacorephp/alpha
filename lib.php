@@ -1,27 +1,79 @@
 <?php
 
+
+/**
+ * More Comming Soon
+ * Developed by : Hardik Trivedi (B.E. - Computer Science)
+ * Contact Email: hpt8592@gmail.com
+ * Websites:-
+ * http://facebook.com/AlphaCoast
+ * http://alphacoast.com
+**/
+
+//---------------------------------------------Framework Start--------------------------------------------//
+
 /**
  * Basic HTML Liberaries
 **/
 
 class lib_html
 {
-    function line_break()
+	function html_start()
+	{
+		echo "<!DOCTYPE html>";
+	}
+
+	function html_stop()
+	{
+		echo "</html>";
+	}
+
+	function html_head_start()
+	{
+		echo "<head>";
+	}
+
+	function html_head_stop()
+	{
+		echo "</head>";
+	}
+
+	function html_title($title)
+	{
+		echo "<title>".$title."</title>";
+	}
+
+	function html_body_start()
+	{
+		echo "<body>";
+	}
+
+	function html_body_stop()
+	{
+		echo "<body>";
+	}
+
+	function html_a($link,$text)
+	{
+		echo "<a href='".$link."'>".$text."</a>";
+	}
+	
+    function html_br()
     {
         echo '<br />';
     }
 
-    function line_break_ret()
+    function html_br_ret()
     {
         return '<br />';
     }
 
-    function horizon_line()
+    function html_hr()
     {
         echo '<hr>';
     }
 
-    function horizon_line_ret()
+    function html_hr_ret()
     {
         return '<hr>';
     }
@@ -47,7 +99,7 @@ class lib_form extends lib_html {
         echo "</form>";
     }
 
-    function form_out_ret()
+    function form_stop_ret()
     {
         return "</form>";
     }
@@ -221,9 +273,9 @@ class lib_mysql extends lib_table {
         mysql_connect($host,$user,$pass);
     }
 
-    function sql_con_default()
+    function sql_con_default($password)
     {
-        mysql_connect("localhost","root","");
+        mysql_connect("localhost","root",$password);
     }
     
     function sql_db_select($db_name)
@@ -323,5 +375,6 @@ class lib_display_query extends lib_mysql
     }
 }
 
+//---------------------------------------------Framework Ends--------------------------------------------//
 
 ?>
